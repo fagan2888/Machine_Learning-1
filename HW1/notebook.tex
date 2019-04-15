@@ -1,0 +1,1241 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{HW1-Decision+Trees+and+Random+Forests}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Machine Learning -\/-Assignment 1: Decision Tree \& Random
+Forest}\label{machine-learning---assignment-1-decision-tree-random-forest}
+
+\subsection{Author: Xiao Jing
+(xj655@nyu.edu)}\label{author-xiao-jing-xj655nyu.edu}
+
+    \subsubsection{Question 1: Accuracy and interpretability (10
+pts)}\label{question-1-accuracy-and-interpretability-10-pts}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Describe a real-world prediction problem using urban data for which
+  \emph{interpretability} of your models and results is essential, and
+  for which it might be preferable to use decision trees rather than
+  random forests. Argue why this is the case. (3 pts)
+\end{enumerate}
+
+    \textbf{Answer:}
+
+When we aim to figuring out what features are affecting road safety, we
+need to interpret the feature importance from one decision tree. That is
+to find out whether the variable A road width or variable B road
+transportation light number increase the risk of the accidents happening
+at one crossing. We need to find the variables and use limited capital
+to invest on these several variables when repairing the road, while
+predicting a new crossing road safe or not is meaningless.
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Describe a real-world prediction problem using urban data for which
+  \emph{accuracy} is paramount and interpretability may be less
+  important, and for which it might be preferable to use random forests
+  rather than decision trees. Argue why this is the case. (3 pts)
+\end{enumerate}
+
+    \textbf{Answer:}
+
+In public health care, when we detecting the possible area of flu
+prevail, we use the trained random forest model and to predict each
+borough or county using data including population flow or temperature.
+In this case, we just want to detect the potential area, so random
+forest and accuracy will be more important.
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Let's imagine that you want to try to get the best of both worlds
+  (accuracy \emph{and} interpretability). So you decide to start by
+  learning a random forest classifier. Describe at least one way of
+  getting some interpretability out of the model by post-processing. You
+  could either pick a method from the literature (e.g., Domingos's work
+  on combining multiple models or some method of computing variable
+  importance), or come up with your own approach (doesn't have to be
+  ground-breaking, but feel free to be creative!) (4 pts)
+\end{enumerate}
+
+    \textbf{Answer:}
+
+I will use permutation method to calculate the varaible importance. For
+example in the question2 health care case, I will use the same dataset
+but disorder the target varaible radomly and make it pseudo variable.
+Then, I will retrain the model to see the delta of accuracy out of
+sample. Redo it on other variable. If the difference (delta) of one
+vairalbe is higher than others', the variable is more important.
+
+    \subsubsection{Question 2: Build a decision tree for classification,
+step by step, following the lecture notes. Note that the dataset has
+been slightly modified, so you will get a different tree than the one
+shown in the lecture notes. (30
+points)}\label{question-2-build-a-decision-tree-for-classification-step-by-step-following-the-lecture-notes.-note-that-the-dataset-has-been-slightly-modified-so-you-will-get-a-different-tree-than-the-one-shown-in-the-lecture-notes.-30-points}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{try}\PY{p}{:}
+            \PY{k+kn}{from} \PY{n+nn}{StringIO} \PY{k}{import} \PY{n}{StringIO}
+        \PY{k}{except} \PY{n+ne}{ImportError}\PY{p}{:}
+            \PY{k+kn}{from} \PY{n+nn}{io} \PY{k}{import} \PY{n}{StringIO}
+        \PY{n}{thefile} \PY{o}{=} \PY{n}{StringIO}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MPG,cylinders,HP,weight}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{good,4,75,light}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{bad,6,90,medium}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{bad,4,110,medium}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{bad,8,175,weighty}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{bad,6,95,medium}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{bad,4,94,light}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{bad,4,95,light}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{bad,8,139,weighty}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{bad,8,190,weighty}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{bad,8,145,weighty}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{bad,6,100,medium}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{good,4,92,medium}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{bad,6,100,weighty}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{bad,8,170,weighty}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{good,4,89,medium}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{good,4,65,light}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{bad,6,85,medium}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{good,4,81,light}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{bad,6,95,medium}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{bad,4,93,light}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{thefile}\PY{p}{)}
+        \PY{n}{df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:}      MPG  cylinders   HP   weight
+        0   good          4   75    light
+        1    bad          6   90   medium
+        2    bad          4  110   medium
+        3    bad          8  175  weighty
+        4    bad          6   95   medium
+        5    bad          4   94    light
+        6    bad          4   95    light
+        7    bad          8  139  weighty
+        8    bad          8  190  weighty
+        9    bad          8  145  weighty
+        10   bad          6  100   medium
+        11  good          4   92   medium
+        12   bad          6  100  weighty
+        13   bad          8  170  weighty
+        14  good          4   89   medium
+        15  good          4   65    light
+        16   bad          6   85   medium
+        17  good          4   81    light
+        18   bad          6   95   medium
+        19   bad          4   93    light
+\end{Verbatim}
+            
+    \subsubsection{Please use numpy and pandas to do the computation for
+parts a) through f). Do not use an existing decision tree implementation
+like sklearn for this
+question.}\label{please-use-numpy-and-pandas-to-do-the-computation-for-parts-a-through-f.-do-not-use-an-existing-decision-tree-implementation-like-sklearn-for-this-question.}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Start with the entire dataset and find the most common MPG value. (2
+  pts)
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{c+c1}{\PYZsh{} your code here}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MPG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:} bad     15
+         good     5
+         Name: MPG, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{k}{def} \PY{n+nf}{InformationGain}\PY{p}{(}\PY{n}{goodY}\PY{p}{,}\PY{n}{badY}\PY{p}{,}\PY{n}{goodN}\PY{p}{,}\PY{n}{badN}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{F}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{Y}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{val1} \PY{o}{=} \PY{n}{X}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{log2}\PY{p}{(}\PY{l+m+mf}{1.}\PY{o}{*}\PY{p}{(}\PY{n}{X}\PY{o}{+}\PY{n}{Y}\PY{p}{)}\PY{o}{/}\PY{n}{X}\PY{p}{)} \PY{k}{if} \PY{n}{X}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0} \PY{k}{else} \PY{l+m+mi}{0}
+                 \PY{n}{val2} \PY{o}{=} \PY{n}{Y}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{log2}\PY{p}{(}\PY{l+m+mf}{1.}\PY{o}{*}\PY{p}{(}\PY{n}{X}\PY{o}{+}\PY{n}{Y}\PY{p}{)}\PY{o}{/}\PY{n}{Y}\PY{p}{)} \PY{k}{if} \PY{n}{Y}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0} \PY{k}{else} \PY{l+m+mi}{0}
+                 \PY{k}{return} \PY{n}{val1}\PY{o}{+}\PY{n}{val2}
+             \PY{k}{return} \PY{p}{(}\PY{n}{F}\PY{p}{(}\PY{n}{goodY}\PY{o}{+}\PY{n}{goodN}\PY{p}{,}\PY{n}{badY}\PY{o}{+}\PY{n}{badN}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{F}\PY{p}{(}\PY{n}{goodY}\PY{p}{,}\PY{n}{badY}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{F}\PY{p}{(}\PY{n}{goodN}\PY{p}{,}\PY{n}{badN}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{goodY}\PY{o}{+}\PY{n}{goodN}\PY{o}{+}\PY{n}{badY}\PY{o}{+}\PY{n}{badN}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Enumerate all the possible binary questions you could ask for each
+  discrete-valued variable. For each such split, compute the numbers of
+  "good" and "bad" MPG vehicles in each of the two child nodes, and
+  compute the information gain using the provided function above. (5
+  pts)
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}350}]:} \PY{c+c1}{\PYZsh{} your code here}
+          \PY{k}{def} \PY{n+nf}{compareInfoGain\PYZus{}discrete}\PY{p}{(}\PY{n}{df}\PY{p}{,}\PY{n}{column}\PY{p}{,}\PY{n}{label\PYZus{}column}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}df: dataframe, input the name of the dataframe; }
+          \PY{l+s+sd}{        column: string, input the name of one discrete\PYZhy{}valued column of the dataframe \PYZsq{}\PYZsq{}\PYZsq{}}
+              \PY{n}{a} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+              \PY{n}{IG} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{list}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{Y} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{==} \PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{label\PYZus{}column}\PY{p}{]}\PY{p}{)}
+                  \PY{k}{if} \PY{n}{Y}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{good}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                      \PY{n}{goodY} \PY{o}{=} \PY{n}{Y}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                      \PY{n}{badY} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{==} \PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{label\PYZus{}column}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}}  \PY{n}{goodY}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{badY} \PY{o}{=} \PY{n}{Y}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                      \PY{n}{goodY} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{==} \PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{label\PYZus{}column}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{badY}
+                  \PY{n}{N} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{!=} \PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{label\PYZus{}column}\PY{p}{]}\PY{p}{)}
+                  \PY{k}{if} \PY{n}{N}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{good}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                      \PY{n}{goodN} \PY{o}{=} \PY{n}{N}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                      \PY{n}{badN} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{!=} \PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{label\PYZus{}column}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{goodN}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{badN} \PY{o}{=} \PY{n}{N}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                      \PY{n}{goodN} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{!=} \PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{label\PYZus{}column}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{badN}
+                  \PY{n}{ig} \PY{o}{=} \PY{n}{InformationGain}\PY{p}{(}\PY{n}{goodY}\PY{p}{,}\PY{n}{badY}\PY{p}{,}\PY{n}{goodN}\PY{p}{,}\PY{n}{badN}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{}print (column, i, \PYZdq{}:\PYZdq{},ig)}
+                  \PY{k}{if} \PY{n}{IG} \PY{o}{\PYZlt{}} \PY{n}{ig}\PY{p}{:}
+                      \PY{n}{IG} \PY{o}{=} \PY{n}{ig}
+                      \PY{n}{rule} \PY{o}{=} \PY{n}{i}
+                      \PY{n}{gY} \PY{o}{=} \PY{n}{goodY}
+                      \PY{n}{bY} \PY{o}{=} \PY{n}{badY}
+                      \PY{n}{gN} \PY{o}{=} \PY{n}{goodN}
+                      \PY{n}{bN} \PY{o}{=} \PY{n}{badN} 
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The binary rule with the largest informatio is }\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{ = }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{, with Information Gain }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{column}\PY{p}{,}\PY{n}{rule}\PY{p}{,}\PY{n}{IG}\PY{p}{)}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{goodY:}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{,badY:}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{,goodN:}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{,badN:}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{gY}\PY{p}{,}\PY{n}{bY}\PY{p}{,}\PY{n}{gN}\PY{p}{,}\PY{n}{bN}\PY{p}{)}\PY{p}{)}
+              \PY{k}{return} \PY{n}{IG}\PY{p}{,}\PY{n}{column}\PY{p}{,}\PY{n}{rule}\PY{p}{,}\PY{n}{gY}\PY{p}{,}\PY{n}{bY}\PY{p}{,}\PY{n}{gN}\PY{p}{,}\PY{n}{bY}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}351}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{compareInfoGain\PYZus{}discrete}\PY{p}{(}\PY{n}{df}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cylinders}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MPG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{compareInfoGain\PYZus{}discrete}\PY{p}{(}\PY{n}{df}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MPG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The binary rule with the largest informatio is "cylinders = 4", with Information Gain 0.3652938975319328
+goodY:5,badY:4,goodN:0,badN:11
+(0.3652938975319328, 'cylinders', 4, 5, 4, 0, 4)
+
+The binary rule with the largest informatio is "weight = weighty", with Information Gain 0.15307795338969116
+goodY:0,badY:6,goodN:5,badN:9
+(0.15307795338969116, 'weight', 'weighty', 0, 6, 5, 6)
+
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Enumerate all the possible binary questions you could ask for the
+  real-valued variable HP. For each such split, compute the numbers of
+  "good" and "bad" MPG vehicles in each of the two child nodes, and
+  compute the information gain using the provided function above. (5
+  pts)
+\end{enumerate}
+
+NOTE: if you'd like, you can just use all midpoints between consecutive
+values of the sorted HP attribute. You are not required to exclude
+provably suboptimal questions like we did in the lecture.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}352}]:} \PY{c+c1}{\PYZsh{} your code here}
+          \PY{k}{def} \PY{n+nf}{compareInfoGain\PYZus{}real}\PY{p}{(}\PY{n}{df}\PY{p}{,}\PY{n}{column}\PY{p}{,}\PY{n}{label\PYZus{}column}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}df: input is the dataframe; }
+          \PY{l+s+sd}{        column: string, input the name of one consecutive value column from the dataframe \PYZsq{}\PYZsq{}\PYZsq{}}
+              \PY{n}{IG} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{n}{a} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{HP}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+              \PY{n}{midpoints} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{n}{temp} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{n}{column}\PY{p}{]}
+              \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{temp}\PY{o}{.}\PY{n}{index}\PY{p}{:}
+                  \PY{k}{if} \PY{n}{j} \PY{o}{\PYZlt{}} \PY{n}{temp}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{:}
+                      \PY{n}{midpoints}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{p}{[}\PY{n}{temp}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{,}\PY{n}{temp}\PY{p}{[}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{}print(midpoints)}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{midpoints}\PY{p}{:}
+                  \PY{n}{Y} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{label\PYZus{}column}\PY{p}{]}\PY{p}{)}
+                  \PY{k}{if} \PY{n}{Y}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{good}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                      \PY{n}{goodY} \PY{o}{=} \PY{n}{Y}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                      \PY{n}{badY} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{label\PYZus{}column}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}}  \PY{n}{goodY}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{badY} \PY{o}{=} \PY{n}{Y}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                      \PY{n}{goodY} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{label\PYZus{}column}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{badY}
+                  \PY{n}{N} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{label\PYZus{}column}\PY{p}{]}\PY{p}{)}
+                  \PY{k}{if} \PY{n}{N}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{good}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                      \PY{n}{goodN} \PY{o}{=} \PY{n}{N}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                      \PY{n}{badN} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{label\PYZus{}column}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{goodN}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{badN} \PY{o}{=} \PY{n}{N}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                      \PY{n}{goodN} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{label\PYZus{}column}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{badN}
+                  \PY{n}{ig} \PY{o}{=} \PY{n}{InformationGain}\PY{p}{(}\PY{n}{goodY}\PY{p}{,}\PY{n}{badY}\PY{p}{,}\PY{n}{goodN}\PY{p}{,}\PY{n}{badN}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{}print (column, \PYZsq{}\PYZlt{}\PYZsq{},i, \PYZdq{}:\PYZdq{},ig)}
+                  \PY{k}{if} \PY{n}{IG} \PY{o}{\PYZlt{}} \PY{n}{ig}\PY{p}{:}
+                      \PY{n}{IG} \PY{o}{=} \PY{n}{ig}
+                      \PY{n}{rule} \PY{o}{=} \PY{n}{i}
+                      \PY{n}{gY} \PY{o}{=} \PY{n}{goodY}
+                      \PY{n}{bY} \PY{o}{=} \PY{n}{badY}
+                      \PY{n}{gN} \PY{o}{=} \PY{n}{goodN}
+                      \PY{n}{bN} \PY{o}{=} \PY{n}{badN} 
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The binary rule with the largest informatio is }\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{ \PYZlt{} }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{, with Information Gain }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{column}\PY{p}{,}\PY{n}{rule}\PY{p}{,}\PY{n}{IG}\PY{p}{)}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{goodY:}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{,badY:}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{,goodN:}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{,badN:}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{gY}\PY{p}{,}\PY{n}{bY}\PY{p}{,}\PY{n}{gN}\PY{p}{,}\PY{n}{bN}\PY{p}{)}\PY{p}{)}
+              \PY{k}{return} \PY{n}{IG}\PY{p}{,}\PY{n}{column}\PY{p}{,}\PY{n}{rule}\PY{p}{,}\PY{n}{gY}\PY{p}{,}\PY{n}{bY}\PY{p}{,}\PY{n}{gN}\PY{p}{,}\PY{n}{bY}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}353}]:} \PY{n}{compareInfoGain\PYZus{}real}\PY{p}{(}\PY{n}{df}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MPG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The binary rule with the largest informatio is "HP < 92.5", with Information Gain 0.5091859254608121
+goodY:5,badY:2,goodN:0,badN:13
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}353}]:} (0.5091859254608121, 'HP', 92.5, 5, 2, 0, 2)
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Based on your results for parts b and c, what is the optimal binary
+  split of the data? Of the two child nodes created by this split, which
+  (if any) would require further partitioning? (4 pts)
+\end{enumerate}
+
+    ** Answer:**
+
+HP \textless{} 92.5 will be the optimal binary split rule with the
+highest info gain 0.51, and the further partitioning is the subset of
+data of which HP \textless{} 92.5, because the Yes Group both label
+"good" and label "bad" are not 0, while in No group label "good" is 0.
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Repeat parts a through d until all training data points are perfectly
+  classified by the resulting tree. (6 pts)
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}354}]:} \PY{c+c1}{\PYZsh{} your code here}
+          \PY{c+c1}{\PYZsh{}one split}
+          \PY{k}{def} \PY{n+nf}{choose\PYZus{}split\PYZus{}rule}\PY{p}{(}\PY{n}{df}\PY{p}{,}\PY{n}{discrete\PYZus{}columns}\PY{p}{,}\PY{n}{real\PYZus{}columns}\PY{p}{,} \PY{n}{label\PYZus{}column} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MPG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+              \PY{n}{ig\PYZus{}} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}
+              \PY{n}{ig} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{discrete\PYZus{}columns}\PY{p}{:}
+                  \PY{n}{ig\PYZus{}} \PY{o}{=} \PY{n}{compareInfoGain\PYZus{}discrete}\PY{p}{(}\PY{n}{df}\PY{p}{,}\PY{n}{i}\PY{p}{,}\PY{n}{label\PYZus{}column}\PY{p}{)}
+                  \PY{k}{if} \PY{n}{ig}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{ig\PYZus{}}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}
+                      \PY{n}{ig} \PY{o}{=} \PY{n}{ig\PYZus{}}
+                      \PY{n}{Type} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D}\PY{l+s+s1}{\PYZsq{}} \PY{c+c1}{\PYZsh{} return type of variable discrete}
+          
+              \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{real\PYZus{}columns}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}
+                  \PY{n}{ig\PYZus{}} \PY{o}{=} \PY{n}{compareInfoGain\PYZus{}real}\PY{p}{(}\PY{n}{df}\PY{p}{,}\PY{n}{real\PYZus{}columns}\PY{p}{,}\PY{n}{label\PYZus{}column}\PY{p}{)}
+                  \PY{k}{if} \PY{n}{ig}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{ig\PYZus{}}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}
+                      \PY{n}{ig} \PY{o}{=} \PY{n}{ig\PYZus{}} \PY{c+c1}{\PYZsh{}choose the optional rules}
+                      \PY{n}{Type} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{R}\PY{l+s+s1}{\PYZsq{}}\PY{c+c1}{\PYZsh{} return tyoe of variable as real}
+                      
+              \PY{k}{if} \PY{n}{Type} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                  \PY{k}{if} \PY{p}{(}\PY{n}{ig}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{ig}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{new\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{ig}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{==} \PY{n}{ig}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{new\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{ig}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{!=} \PY{n}{ig}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{k}{if} \PY{p}{(}\PY{n}{ig}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{ig}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{new\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{ig}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{ig}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{new\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{ig}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{ig}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}
+              \PY{k}{return} \PY{n}{ig}\PY{p}{,} \PY{n}{Type}\PY{p}{,} \PY{n}{new\PYZus{}df}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}355}]:} \PY{n}{df} \PY{o}{=} \PY{n}{df}
+          \PY{n}{discrete\PYZus{}columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cylinders}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{real\PYZus{}columns} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HP}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{choose\PYZus{}split\PYZus{}rule}\PY{p}{(}\PY{n}{df}\PY{p}{,}\PY{n}{discrete\PYZus{}columns}\PY{p}{,}\PY{n}{real\PYZus{}columns}\PY{p}{,} \PY{n}{label\PYZus{}column} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MPG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The binary rule with the largest informatio is "cylinders = 4", with Information Gain 0.3652938975319328
+goodY:5,badY:4,goodN:0,badN:11
+The binary rule with the largest informatio is "weight = weighty", with Information Gain 0.15307795338969116
+goodY:0,badY:6,goodN:5,badN:9
+The binary rule with the largest informatio is "HP < 92.5", with Information Gain 0.5091859254608121
+goodY:5,badY:2,goodN:0,badN:13
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}355}]:} ((0.5091859254608121, 'HP', 92.5, 5, 2, 0, 2),
+           'R',
+                MPG  cylinders  HP  weight
+           0   good          4  75   light
+           1    bad          6  90  medium
+           11  good          4  92  medium
+           14  good          4  89  medium
+           15  good          4  65   light
+           16   bad          6  85  medium
+           17  good          4  81   light)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}380}]:} \PY{c+c1}{\PYZsh{}def decisiontree(dep=100):}
+          \PY{n}{depth} \PY{o}{=} \PY{l+m+mi}{20}
+          \PY{n}{W} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{line} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{n}{new\PYZus{}df} \PY{o}{=} \PY{n}{df}
+          \PY{n}{Type} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{depth}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:} 
+              \PY{n}{W}\PY{o}{.}\PY{n}{append}\PY{p}{(} \PY{n}{choose\PYZus{}split\PYZus{}rule}\PY{p}{(}\PY{n}{new\PYZus{}df}\PY{p}{,}\PY{n}{discrete\PYZus{}columns}\PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cylinders}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{real\PYZus{}columns}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label\PYZus{}column} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MPG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+              \PY{n}{new\PYZus{}df} \PY{o}{=} \PY{n}{choose\PYZus{}split\PYZus{}rule}\PY{p}{(}\PY{n}{new\PYZus{}df}\PY{p}{,}\PY{n}{discrete\PYZus{}columns}\PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cylinders}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{real\PYZus{}columns}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label\PYZus{}column} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MPG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+              \PY{n}{new\PYZus{}df} \PY{o}{=} \PY{n}{new\PYZus{}df}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+              \PY{n}{line} \PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+              \PY{k}{if} \PY{n}{new\PYZus{}df}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{2}\PY{p}{:}
+                  \PY{k}{break}
+          \PY{n}{W} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{W}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{line}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{W}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The binary rule with the largest informatio is "cylinders = 4", with Information Gain 0.3652938975319328
+goodY:5,badY:4,goodN:0,badN:11
+The binary rule with the largest informatio is "weight = weighty", with Information Gain 0.15307795338969116
+goodY:0,badY:6,goodN:5,badN:9
+The binary rule with the largest informatio is "HP < 92.5", with Information Gain 0.5091859254608121
+goodY:5,badY:2,goodN:0,badN:13
+The binary rule with the largest informatio is "cylinders = 4", with Information Gain 0.3652938975319328
+goodY:5,badY:4,goodN:0,badN:11
+The binary rule with the largest informatio is "weight = weighty", with Information Gain 0.15307795338969116
+goodY:0,badY:6,goodN:5,badN:9
+The binary rule with the largest informatio is "HP < 92.5", with Information Gain 0.5091859254608121
+goodY:5,badY:2,goodN:0,badN:13
+The binary rule with the largest informatio is "cylinders = 4", with Information Gain 0.8631205685666309
+goodY:5,badY:0,goodN:0,badN:2
+The binary rule with the largest informatio is "weight = light", with Information Gain 0.2916919971380595
+goodY:3,badY:0,goodN:2,badN:2
+The binary rule with the largest informatio is "HP < 83.0", with Information Gain 0.2916919971380595
+goodY:3,badY:0,goodN:2,badN:2
+The binary rule with the largest informatio is "cylinders = 4", with Information Gain 0.8631205685666309
+goodY:5,badY:0,goodN:0,badN:2
+The binary rule with the largest informatio is "weight = light", with Information Gain 0.2916919971380595
+goodY:3,badY:0,goodN:2,badN:2
+The binary rule with the largest informatio is "HP < 83.0", with Information Gain 0.2916919971380595
+goodY:3,badY:0,goodN:2,badN:2
+[['0.5091859254608121' 'HP' '92.5' '5' '2' '0' '2']
+ ['0.8631205685666309' 'cylinders' '4' '5' '0' '0' '0']]
+
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Draw or show the final decision tree in a format of your choice. The
+  decision to make at each step and the predicted value at each leaf
+  node must be clear. (4 pts)
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}381}]:} \PY{c+c1}{\PYZsh{}Your answer here}
+              
+          \PY{n}{W\PYZus{}show} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{W}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Information\PYZus{}Gain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Node\PYZus{}Feature Fuction}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PYZbs{}
+                                            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Threshold(\PYZlt{}Real value, =Discrete value)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+                                       \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Good\PYZus{}Yes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Bad\PYZus{}Yes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Good\PYZus{}No}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Bad\PYZus{}No}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}
+          \PY{n}{W\PYZus{}show}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Discrete}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Real}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{W\PYZus{}show}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}381}]:}      Information\_Gain Node\_Feature Fuction  \textbackslash{}
+          0  0.5091859254608121                   HP   
+          1  0.8631205685666309            cylinders   
+          
+            Threshold(<Real value, =Discrete value) Good\_Yes Bad\_Yes Good\_No Bad\_No  \textbackslash{}
+          0                                    92.5        5       2       0      2   
+          1                                       4        5       0       0      0   
+          
+                 Type  
+          0  Discrete  
+          1      Real  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}410}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Node }\PY{l+s+si}{\PYZpc{}i}\PY{l+s+s1}{: }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{, goodY:}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{,badY:}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{,goodN:}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{,badN:}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{W}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZlt{}}\PY{l+s+s1}{\PYZsq{}} \PY{k}{if} \PY{n}{i}\PY{o}{==}\PY{l+m+mi}{0} \PY{k}{else} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{W}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{n}{W}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}\PY{n}{W}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}\PY{n}{W}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,}\PY{n}{W}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{When }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{, all the MPG are bad }\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{W}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZgt{}}\PY{l+s+s1}{\PYZsq{}} \PY{k}{if} \PY{n}{i}\PY{o}{==}\PY{l+m+mi}{0} \PY{k}{else} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{!=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{W}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The rest of labels are good}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Node 1: HP < 92.5, goodY:5,badY:2,goodN:0,badN:2 
+When HP > 92.5, all the MPG are bad 
+Node 2: cylinders = 4, goodY:5,badY:0,goodN:0,badN:0 
+When cylinders != 4, all the MPG are bad 
+The rest of label are good
+
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Classify each of the following four vehicles as having "good" or "bad"
+  fuel efficiency (miles per gallon). Do this by hand using the tree
+  structure learned in part f. (4 pts)
+\end{enumerate}
+
+Answer:
+
+Bad,8,70,light
+
+Bad,6,113,medium
+
+Good,4,83,weighty
+
+Bad,4,95,weighty
+
+    \subsubsection{Question 3, Predicting burden of disease （40
+pts)}\label{question-3-predicting-burden-of-disease-40-pts}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}543}]:} \PY{n}{data}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Burden of diarrheal illness by country.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}543}]:}        Country  FrxnPeaceIn10  ODA4H2OPcptaDol  RenewResm3PcptaYr  \textbackslash{}
+          0  Afghanistan            0.1             0.16               2986   
+          1      Albania            1.0             5.58              13306   
+          2      Algeria            0.0             0.33                473   
+          
+             SustAccImprWatRur  SustAccImprWatUrb  SustAccImprSanRur  SustAccImprSanUrb  \textbackslash{}
+          0            0.10891            0.18812           0.049505            0.15842   
+          1            0.94059            0.98020           0.801980            0.98020   
+          2            0.79208            0.91089           0.811880            0.98020   
+          
+             TotHlthExpPctofGDP  GenGovtPctofTotHlthExp  ExtResHlthPctTotExpHlth  \textbackslash{}
+          0               0.065                   0.395                   0.4560   
+          1               0.065                   0.417                   0.0340   
+          2               0.041                   0.808                   0.0005   
+          
+             PCptaGovtExpHlthAvgExcRt  GDPPCptaIntDol  AdultLtrcyRate  FemaleLtrcyRate  \textbackslash{}
+          0                         4             430         0.35644          0.20792   
+          1                        49            6158         0.85644          0.78713   
+          2                        71            4860         0.69307          0.60396   
+          
+            BurdenOfDisease  
+          0           awful  
+          1             low  
+          2            high  
+\end{Verbatim}
+            
+    \subsubsection{Data dictionary}\label{data-dictionary}
+
+NAME: Burden of diarrheal illness by country
+
+SIZE: 130 Countries, 16 Variables
+
+VARIABLE DESCRIPTIONS:
+
+Country: Country name
+
+FrxnPeaceIn10: Fraction of the past ten years in which a country has
+been at peace
+
+ODA4H2OPcptaDol: Per Capita Official Developmental Assistance for water
+projects
+
+RenewResm3PcptaYr: Renewable Water Resources in cubic meters per capita
+per year
+
+SustAccImprWatRur: Fraction of rural population with sustainable access
+to improved water
+
+SustAccImprWatUrb: Fraction of urban population with sustainable access
+to improved water
+
+SustAccImprSanRur: Fraction of rural population with sustainable access
+to improved sanitation
+
+SustAccImprSanUrb: Fraction of urban population with sustainable access
+to improved sanitation
+
+TotHlthExpPctofGDP: Fraction of a country's GDP devoted to health
+spending
+
+GenGovtPctofTotHlthExp: The fraction of total health expenditures for a
+country which is provided by the government
+
+ExtResHlthPctTotExpHlth: The fraction of total health expenditures for a
+country which is comes from sources external to the country
+
+PCptaGovtExpHlthAvgExcRt: Per Capita Government Health Expenditures at
+the average exchange rate
+
+GDPPCptaIntDol: Gross Domestic Product per capita in international
+dollars
+
+AdultLtrcyRate: Adult Literacy rate
+
+FemaleLtrcyRate: Female Literacy rate
+
+BurdenOfDisease: Our target variable for classification. The burden of
+disease due to diarrheal illness, categorized into "low", "medium",
+"high", and "awful" quartiles. For each country, we have estimates of
+the number of Disability-Adjusted Life Years lost per 1000 persons per
+year (DALYs) due to diarrheal illness. Countries with "low" burden of
+disease have up to 2.75345 DALYs; countries with "medium" burden of
+disease have between 2.75345 and 8.2127 DALYs; countries with "high"
+burden of disease have between 8.2127 and 26.699 DALYs; and countries
+with "awful" burden of diease have more than 26.699 DALYs.
+
+    \subsubsection{Your goal is to train a decision tree classifier for the
+attribute ``BurdenOfDisease" using all other variables (except country
+name) as features with
+sklearn.tree.DecisionTreeClassifier.}\label{your-goal-is-to-train-a-decision-tree-classifier-for-the-attribute-burdenofdisease-using-all-other-variables-except-country-name-as-features-with-sklearn.tree.decisiontreeclassifier.}
+
+http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Please choose a train/test split and choose a hyper-parameter
+  governing model simplicity, for example, the maximum tree depth or
+  maximum number of leaf nodes. Then, fit your decision tree classifier
+  (using the training set) for different values of this parameter and
+  for each such value, record the corresponding classification accuracy
+  on the test set. (10 pts)
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}544}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{tree} \PY{k}{import} \PY{n}{DecisionTreeClassifier}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{,} \PY{n}{make\PYZus{}scorer}
+          
+          \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Let\PYZsq{}s take \PYZdq{}BurdenOfDisease\PYZdq{} as the target variable. }
+          \PY{n}{y}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{BurdenOfDisease}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          
+          \PY{n}{X}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FrxnPeaceIn10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FemaleLtrcyRate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{X}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Split data into 70\PYZpc{} train, 30\PYZpc{} test}
+          \PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{o}{=}\PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{999}\PY{p}{)}
+          \PY{n+nb}{print} \PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+    FrxnPeaceIn10  ODA4H2OPcptaDol  RenewResm3PcptaYr  SustAccImprWatRur  \textbackslash{}
+7             1.0             0.00                 66            0.85149   
+53            1.0             8.04             317000            0.82178   
+15            1.0             4.19               9345            0.89109   
+36            0.4             0.12              25183            0.28713   
+12            1.0             2.87              45564            0.59406   
+
+    SustAccImprWatUrb  SustAccImprSanRur  SustAccImprSanUrb  \textbackslash{}
+7             0.97030            0.99010            0.99010   
+53            0.82178            0.59406            0.85149   
+15            0.99010            0.24752            0.56436   
+36            0.82178            0.22772            0.42574   
+12            0.85149            0.69307            0.64356   
+
+    TotHlthExpPctofGDP  GenGovtPctofTotHlthExp  ExtResHlthPctTotExpHlth  \textbackslash{}
+7                0.064                   0.475                    0.002   
+53               0.048                   0.826                    0.032   
+15               0.056                   0.582                    0.029   
+36               0.040                   0.183                    0.151   
+12               0.031                   0.835                    0.186   
+
+    PCptaGovtExpHlthAvgExcRt  GDPPCptaIntDol  AdultLtrcyRate  FemaleLtrcyRate  
+7                        533           19930         0.94653          0.95545  
+53                        44            6198         0.97822          0.97525  
+15                       135            7344         0.79010          0.81584  
+36                         1             382         0.64851          0.54554  
+12                         9            2035         0.46535          0.33663  
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}545}]:} \PY{n}{AUC\PYZus{}OS}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+          \PY{n}{Acc} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{)}\PY{p}{:}
+              \PY{n}{dt}\PY{o}{=}\PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{n}{max\PYZus{}leaf\PYZus{}nodes}\PY{o}{=}\PY{n}{i}\PY{p}{)}
+              \PY{n}{dt}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+              \PY{n}{y\PYZus{}true} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{)}
+              
+              \PY{n}{AUC\PYZus{}OS}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{)}\PY{p}{,}\PY{n}{dt}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{n}{average}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{macro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+              \PY{n}{Acc}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{dt}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{Acc}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{///}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{AUC\PYZus{}OS}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.3333333333333333, 0.6923076923076923, 0.6410256410256411, 0.6410256410256411, 0.6153846153846154, 0.6410256410256411, 0.6410256410256411, 0.6666666666666666, 0.6410256410256411, 0.6666666666666666, 0.6666666666666666, 0.6666666666666666, 0.6666666666666666, 0.6153846153846154, 0.6666666666666666, 0.6410256410256411, 0.6410256410256411, 0.6410256410256411, 0.6666666666666666, 0.6410256410256411] /// [0.7196544578853047, 0.7922995071684586, 0.7507444476446492, 0.7506184395801332, 0.7328233006912442, 0.7507444476446492, 0.7506184395801332, 0.7727682571684589, 0.7507444476446492, 0.7704101062467998, 0.7702756976446492, 0.7701496895801332, 0.7702756976446492, 0.7329493087557604, 0.7727682571684589, 0.7506184395801332, 0.7507444476446492, 0.7506184395801332, 0.7726422491039426, 0.7507444476446492]
+
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Make a plot of accuracy vs. simplicity for different values of the
+  hyper-parameter chosen in part a). That is, the x-axis should be
+  hyper-parameter value (e.g. tree depth) and the y-axis should be
+  accuracy. (10 pts)
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}553}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pylab} \PY{k}{as} \PY{n+nn}{plt}
+          
+          \PY{c+c1}{\PYZsh{} your code here}
+          \PY{o}{\PYZpc{}}\PY{k}{pylab} inline
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{)}\PY{p}{,}\PY{n}{AUC\PYZus{}OS}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AUC\PYZus{}OS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{)}\PY{p}{,}\PY{n}{Acc}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean Accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Max leaf nodes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OS\PYZus{}AUC}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{AUC/Accuracy vs Simplicity (max leaf nodes)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Populating the interactive namespace from numpy and matplotlib
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/anaconda3/lib/python3.6/site-packages/IPython/core/magics/pylab.py:160: UserWarning: pylab import has clobbered these variables: ['plt']
+`\%matplotlib` prevents importing * from pylab and numpy
+  "\textbackslash{}n`\%matplotlib` prevents importing * from pylab and numpy"
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}553}]:} <matplotlib.legend.Legend at 0x1a20278860>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Tune the hyper-parameter you choose in part a) by cross-validation
+  using the training data. You can choose to use the GridSearchCV
+  package from sklearn or write your own code to do cross-validation by
+  spliting the training data into training and validation data. What is
+  the out of sample accuracy after tuning the hyper-parameter? (10 pts)
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}554}]:} \PY{n}{my\PYZus{}scorer} \PY{o}{=} \PY{n}{make\PYZus{}scorer}\PY{p}{(}\PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{,} \PY{n}{average}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{micro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}572}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{GridSearchCV}
+          
+          \PY{c+c1}{\PYZsh{} your code here}
+          \PY{c+c1}{\PYZsh{}X\PYZus{}train2,X\PYZus{}val,y\PYZus{}train2,y\PYZus{}val=train\PYZus{}test\PYZus{}split(X\PYZus{}train, y\PYZus{}train, test\PYZus{}size=0.3, random\PYZus{}state=999)}
+          \PY{n}{y\PYZus{}true} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{)}
+          \PY{n}{param\PYZus{}grid} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}leaf\PYZus{}nodes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{)}\PY{p}{\PYZcb{}}
+          \PY{n}{dt}\PY{o}{=}\PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{p}{)}
+          \PY{n}{gr}\PY{o}{=}\PY{n}{GridSearchCV}\PY{p}{(}\PY{n}{dt}\PY{p}{,}\PY{n}{param\PYZus{}grid}\PY{o}{=}\PY{n}{param\PYZus{}grid}\PY{p}{,}\PY{n}{scoring}\PY{o}{=}\PY{n}{my\PYZus{}scorer}\PY{p}{)}
+          \PY{n}{rs}\PY{o}{=}\PY{n}{gr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}true}\PY{p}{)}
+          \PY{n+nb}{print} \PY{p}{(}\PY{n}{rs}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}\PY{p}{)}
+          
+          \PY{n}{y\PYZus{}testt} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{)}
+          \PY{n}{rs\PYZus{}s} \PY{o}{=} \PY{n}{rs}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}testt}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rs out of sample mean accuracy score is}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{rs\PYZus{}s}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}print (roc\PYZus{}auc\PYZus{}score(np.array(y\PYZus{}true),dt.predict\PYZus{}proba(X\PYZus{}test),average=\PYZsq{}macro\PYZsq{}))}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{'max\_leaf\_nodes': 27\}
+rs out of sample mean accuracy score is 0.7948717948717948
+
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Visualize a simple decision tree (e.g., with max\_depth = 2 or 3)
+  learned from the data. To do so, given your decision tree dt, you can
+  use the code below, then copy and paste the resulting output into
+  http://www.webgraphviz.com. Alternatively, if you have graphviz
+  installed on your machine, you can use that. (5 pts)
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}573}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{tree}
+          
+          \PY{c+c1}{\PYZsh{} your code here}
+          \PY{n}{dt}\PY{o}{=}\PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{n}{max\PYZus{}depth} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+          \PY{n}{thestring}\PY{o}{=}\PY{n}{tree}\PY{o}{.}\PY{n}{export\PYZus{}graphviz}\PY{p}{(}\PY{n}{dt}\PY{p}{,}\PY{n}{out\PYZus{}file}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,}
+                                   \PY{n}{feature\PYZus{}names}\PY{o}{=}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{,}  
+                                   \PY{n}{class\PYZus{}names}\PY{o}{=}\PY{n}{dt}\PY{o}{.}\PY{n}{classes\PYZus{}}\PY{p}{,}  
+                                   \PY{n}{filled}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{rounded}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}  
+                                   \PY{n}{special\PYZus{}characters}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{impurity}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZlt{}br/\PYZgt{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZam{}le;}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZlt{}=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{=\PYZlt{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{=}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZgt{},}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(} \PY{n}{thestring}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+digraph Tree \{
+node [shape=box, style="filled, rounded", color="black", fontname=helvetica] ;
+edge [fontname=helvetica] ;
+0 [label="AdultLtrcyRate <= 0.856, samples = 91, value = [17, 25, 26, 23], class = low", fillcolor="\#399de504"] ;
+1 [label="GDPPCptaIntDol <= 1094.0, samples = 48, value = [17, 22, 1, 8], class = high", fillcolor="\#47e53929"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label="samples = 9, value = [9, 0, 0, 0], class = awful", fillcolor="\#e58139ff"] ;
+1 -> 2 ;
+3 [label="samples = 39, value = [8, 22, 1, 8], class = high", fillcolor="\#47e53973"] ;
+1 -> 3 ;
+4 [label="SustAccImprSanUrb <= 0.842, samples = 43, value = [0, 3, 25, 15], class = low", fillcolor="\#399de55b"] ;
+0 -> 4 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+5 [label="samples = 12, value = [0, 2, 1, 9], class = medium", fillcolor="\#d739e5b2"] ;
+4 -> 5 ;
+6 [label="samples = 31, value = [0, 1, 24, 6], class = low", fillcolor="\#399de5b8"] ;
+4 -> 6 ;
+\}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}574}]:} \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Image}  
+          \PY{k+kn}{import} \PY{n+nn}{pydotplus}
+          
+          \PY{n}{graph} \PY{o}{=} \PY{n}{pydotplus}\PY{o}{.}\PY{n}{graph\PYZus{}from\PYZus{}dot\PYZus{}data}\PY{p}{(}\PY{n}{thestring}\PY{p}{)}  
+          \PY{n}{Image}\PY{p}{(}\PY{n}{graph}\PY{o}{.}\PY{n}{create\PYZus{}png}\PY{p}{(}\PY{p}{)}\PY{p}{)} 
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}574}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \subsubsection{Question 4, Fit a random forest to the data from question
+3 (20
+pts)}\label{question-4-fit-a-random-forest-to-the-data-from-question-3-20-pts}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Please use the same test/train split from previous question and feel
+  free to tune the hyper-parameters for Random Forest model using
+  training data. The package from sklearn is here:
+  http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html.
+  Then please report your out of sample prediction result and compare
+  this model's performance with 3c). (10 pts)
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}575}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestClassifier}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{GridSearchCV}
+          
+          \PY{c+c1}{\PYZsh{} your code here}
+          \PY{n}{param\PYZus{}grid} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}leaf\PYZus{}nodes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{)}\PY{p}{\PYZcb{}}
+          \PY{n}{dt}\PY{o}{=}\PY{n}{RandomForestClassifier}\PY{p}{(}\PY{p}{)}
+          \PY{n}{gs}\PY{o}{=}\PY{n}{GridSearchCV}\PY{p}{(}\PY{n}{dt}\PY{p}{,}\PY{n}{param\PYZus{}grid}\PY{o}{=}\PY{n}{param\PYZus{}grid}\PY{p}{,}\PY{n}{scoring}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{roc\PYZus{}auc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{rfc}\PY{o}{=}\PY{n}{gs}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}true}\PY{p}{)}
+          \PY{n}{rfc\PYZus{}s} \PY{o}{=} \PY{n}{rfc}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}testt}\PY{p}{)}
+          \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Best hyper\PYZhy{}parameters is}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{rs}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RandomForest Classifier out of sameple mean accuracy score is}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{rfc\PYZus{}s}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Compare Random Forest Classification and Decision Model Tree}
+          \PY{k}{if} \PY{n}{rfc\PYZus{}s} \PY{o}{\PYZgt{}} \PY{n}{rs\PYZus{}s}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Randomforest Classification is better}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{k}{elif} \PY{n}{rfc\PYZus{}s} \PY{o}{==} \PY{n}{rs\PYZus{}s}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Same performance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{k}{else}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Decision tree is better}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best hyper-parameters is \{'max\_leaf\_nodes': 27\}
+RandomForest Classifier out of sameple mean accuracy score is 0.9003046861665814
+Randomforest Classification is better
+
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Write one paragraph comparing the results from those two models
+  (Random Forest vs Decision Tree) in terms of both accuracy and
+  interpretability. (10 pts)
+\end{enumerate}
+
+    \textbf{Answer:}
+
+According to Out of sample mean accuracy(see the code above), the Random
+forest performs better than one decision tree. However, I can get the
+feature importance score for decision model but the discrepency of
+feature importance score from Random forest tree is not very significant
+and difficult to interpret the cause and effect according to the
+algorithm. As to the interpretability, the decision tree performs
+better.( See the code below)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}593}]:} \PY{c+c1}{\PYZsh{} Random Forest Feature importance \PYZhy{}\PYZhy{}\PYZhy{}top 5 feature}
+          \PY{n}{hyper\PYZus{}para} \PY{o}{=} \PY{n}{rs}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}leaf\PYZus{}nodes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{dt}\PY{o}{=}\PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{max\PYZus{}leaf\PYZus{}nodes}\PY{o}{=} \PY{n}{hyper\PYZus{}para} \PY{p}{)}
+          \PY{n}{rfc\PYZus{}} \PY{o}{=} \PY{n}{dt}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}true}\PY{p}{)}
+          \PY{n}{Feature\PYZus{}importance}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{[}\PY{n+nb}{list}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{,}\PY{n+nb}{list}\PY{p}{(}\PY{n}{rfc\PYZus{}}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+          \PY{n}{Feature\PYZus{}importance}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{variables}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{importance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} list the top 5 most important features in order}
+          \PY{n}{Feature\PYZus{}importance}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{importance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}593}]:}             variables importance
+          12     AdultLtrcyRate   0.157473
+          13    FemaleLtrcyRate   0.143909
+          3   SustAccImprWatRur   0.103908
+          6   SustAccImprSanUrb   0.100582
+          11     GDPPCptaIntDol  0.0971112
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}594}]:} \PY{c+c1}{\PYZsh{} Decision Tree Feature importance\PYZhy{}\PYZhy{}\PYZhy{}top 5 feature}
+          \PY{n}{hyper\PYZus{}para} \PY{o}{=} \PY{n}{rs}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}leaf\PYZus{}nodes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{dt}\PY{o}{=}\PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{n}{max\PYZus{}leaf\PYZus{}nodes}\PY{o}{=} \PY{n}{hyper\PYZus{}para} \PY{p}{)}
+          \PY{n}{rs\PYZus{}} \PY{o}{=} \PY{n}{dt}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}true}\PY{p}{)}
+          \PY{n}{Feature\PYZus{}importance}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{[}\PY{n+nb}{list}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{,}\PY{n+nb}{list}\PY{p}{(}\PY{n}{rs\PYZus{}}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+          \PY{n}{Feature\PYZus{}importance}\PY{o}{.}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{variables}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{importance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} list the top 5 most important features in order}
+          \PY{n}{Feature\PYZus{}importance}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{importance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}594}]:}                   variables importance
+          12           AdultLtrcyRate   0.247353
+          11           GDPPCptaIntDol   0.158897
+          13          FemaleLtrcyRate   0.151244
+          6         SustAccImprSanUrb   0.122536
+          9   ExtResHlthPctTotExpHlth   0.118729
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
